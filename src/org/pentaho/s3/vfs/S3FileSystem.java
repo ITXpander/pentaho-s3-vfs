@@ -31,6 +31,7 @@ import org.apache.commons.vfs2.provider.AbstractFileSystem;
 import org.apache.commons.vfs2.provider.URLFileName;
 import org.jets3t.service.S3Service;
 import org.jets3t.service.impl.rest.httpclient.RestS3Service;
+import org.jets3t.service.security.AWSEC2IAMSessionCredentials;
 import org.jets3t.service.security.AWSCredentials;
 import org.jets3t.service.security.ProviderCredentials;
 
