@@ -69,7 +69,14 @@ public class S3FileSystem extends AbstractFileSystem implements FileSystem {
         awsAccessKey = ( (URLFileName) getRootName() ).getUserName();
         awsSecretKey = ( (URLFileName) getRootName() ).getPassword();
       }
-      ProviderCredentials awsCredentials = new AWSCredentials( awsAccessKey, awsSecretKey );
+      
+      ProviderCredentials awsCredentials = null;
+      if( awsAccessKey == null && awsSecretKey == null ) {
+        awsCredentials = AWSEC2IAMSessionCredentials.loadFromEC2InstanceData( true );
+      } else {
+        awsCredentials = new AWSCredentials( awsAccessKey, awsSecretKey );
+      }
+
       try {
         service = new RestS3Service( awsCredentials );
       } catch ( Throwable t ) {
